@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   
   has_attached_file :image, 
-                    styles: { polaroid: '', thumb: '100x100>' }, 
+                    styles: { polaroid: '1x1>', thumb: '100x100>' }, 
                     default_url: '/images/:style/missing.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
+//= require jquery.fittext
 //= require twitter/bootstrap
 // require turbolinks
 //= require angular-file-upload-shim
