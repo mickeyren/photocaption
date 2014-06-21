@@ -17,6 +17,7 @@
 //= require angular-file-upload-shim
 //= require angular
 //= require angular-file-upload
+//= require loading-bar
 
 //= require_tree ./angular
 

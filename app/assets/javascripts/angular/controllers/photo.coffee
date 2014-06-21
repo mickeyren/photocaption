@@ -1,5 +1,5 @@
 #inject angular file upload directives and service.
-window.PhotoCaption = angular.module "PhotoCaption", ["angularFileUpload"]
+window.PhotoCaption = angular.module "PhotoCaption", ['angular-loading-bar', 'angularFileUpload']
 
 PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
   $scope.imageUrl = null
