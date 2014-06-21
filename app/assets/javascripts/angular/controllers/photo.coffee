@@ -2,7 +2,8 @@
 window.PhotoCaption = angular.module "PhotoCaption", ["angularFileUpload"]
 
 PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
-  
+  $scope.imageUrl = null
+
   $scope.onFileSelect = ($files) ->    
     #$files: an array of files selected, each file has name, size, and type.
     i = 0
@@ -23,16 +24,17 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
       $scope.upload = $upload.upload(
         url: '/photos'
         data:
-          myObj: $scope.myModelObj
+          caption: $scope.caption
 
         file: file
       ).progress((evt) ->
         console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
         
-      ).success((data, status, headers, config) ->
+      ).success((data, status, headers, config) =>
         
         # file is uploaded successfully
-        console.log data    
+        console.log(data)
+        @imageUrl = data.url
       )
       i++
     

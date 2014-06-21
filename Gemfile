@@ -32,7 +32,9 @@ gem 'angularjs-rails'           # A simple Angular.js wrapper for Rails
 
 gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3' # Twitter Bootstrap for Rails 3.x - 4 Asset Pipeline 
 
-gem "paperclip", "~> 4.1"       # Easy file attachment management for ActiveRecord
+gem 'paperclip', '~> 4.1'       # Easy file attachment management for ActiveRecord
+
+gem 'rmagick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
