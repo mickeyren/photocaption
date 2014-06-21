@@ -18,11 +18,15 @@
 // require turbolinks
 //= require angular-file-upload-shim
 //= require angular
+//= require angular-route
 //= require angular-underscore
 //= require angular-file-upload
 //= require loading-bar
 //= require restangular
+// require angular-rails-templates
+// require_tree ../templates
 //= require module
 //= require_tree ./angular
+
 
 // require_tree .

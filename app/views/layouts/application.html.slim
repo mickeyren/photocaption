@@ -26,7 +26,7 @@ html lang="en" ng-app="PhotoCaption"
         .navbar-header.page-scroll
           button.navbar-toggle data-target=".navbar-main-collapse" data-toggle="collapse" type="button" 
             i.fa.fa-bars
-          a.navbar-brand href="#page-top" 
+          a.navbar-brand href="/#/" 
             i.fa.fa-play-circle
             span.light Photo
             | Caption
@@ -37,27 +37,21 @@ html lang="en" ng-app="PhotoCaption"
             li.hidden
               a href="#page-top" 
             li.page-scroll
-              a href="#about"  About
+              a href="/#/about"  About
         /! /.navbar-collapse
       /! /.container
     section.intro
       .intro-body
         .container
           .row
-            .col-md-8.col-md-offset-2
-              / = bootstrap_flash
-              = yield
+            .col-md-8.col-md-offset-2 ng-view='true'
+              
               / h1.brand-heading Photo Caption
               / p.intro-text Polaroid your photos and place caption
               / .page-scroll
               /   a.btn.btn-circle href="#about" 
               /     i.fa.fa-angle-double-down.animated
     
-    section#about.container.content-section.text-center
-      .row
-        .col-lg-8.col-lg-offset-2
-          h2 About Photo Caption
-          p A simple service that creates a polaroid version of your photo and lets you enter a caption.
           
     
     section#contact.container.content-section.text-center
@@ -67,6 +61,11 @@ html lang="en" ng-app="PhotoCaption"
           p 
             | Contact me at my 
             a href='http://programmingmind.com/contact_forms/new' site
+
+  - templates('app/views/angular').each do |path|
+    script type='text/ng-template' id=path
+      = render template: File.join('angular', path.gsub(/.html$/, ''))
+
 
       footer
         p &copy; David Ang 2014

@@ -1,4 +1,22 @@
-window.PhotoCaption = angular.module "PhotoCaption", ['angularFileUpload', 'angular-loading-bar', 'restangular']
+
+window.PhotoCaption = angular.module "PhotoCaption", ['angularFileUpload', 'angular-loading-bar', 'restangular', 'ngRoute']
+
+PhotoCaption.config ['$routeProvider', ($routeProvider) ->
+  $routeProvider
+    .when '/',
+      controller:  'PhotoController'
+      templateUrl: 'photo.html'
+      page_title: -> 'Photo Caption'
+
+    .when '/about',
+      controller:  'AboutController'
+      templateUrl: 'about.html'
+      page_title: -> 'About Photo Caption'
+
+    .otherwise
+      templateUrl: '404.html'
+      page_title: -> "Not Found"      
+]
 
 
 PhotoCaption.run ($rootScope) ->
