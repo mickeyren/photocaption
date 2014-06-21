@@ -3,6 +3,7 @@ include Magick
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+
   def create
     photo = Photo.new
     photo.caption = params[:caption]
@@ -19,20 +20,26 @@ class PhotosController < ApplicationController
   end
 
   def update
-    image = Photo.last.image
-    update_image_caption(image, params[:caption]) if params[:caption]
+    photo = Photo.find params[:id]
+    photo.update_attributes(photo_params)
+
+    update_image_caption(photo.image, photo_params[:caption]) if photo_params[:caption]
     
-    render json: { url: image.url(:polaroid) }
+    render json: { url: photo.image.url(:polaroid) }
   end
 
-  private
+  protected
+    def photo_params
+      params.require(:photo).permit(:caption)
+    end
+
     def create_polaroid_version(photo_image, caption)
-      image = Magick::Image.read(photo_image.path).first
+      image = Magick::Image.read(photo_image.path(:copy)).first
 
       #image.border!(18, 58, "#f0f0ff")
-      image = image.frame(25, 50, 25, 15, 0, 0, '#ffffff')
-
-      image.background_color = "none"
+      image = image.frame(25, 50, 25, 15, 0, 0, '#fefefe')
+      image.transparent_color = '#ff1493'
+      image.background_color = 'none'
 
       amplitude = image.columns * 0.01
       wavelength = image.rows  * 2
@@ -41,36 +48,29 @@ class PhotosController < ApplicationController
       image = image.wave(amplitude, wavelength)
       image.rotate!(-90)
 
-      shadow = image.flop
-      shadow = shadow.colorize(1, 1, 1, "gray75")
-      shadow.background_color = "white"
-      shadow.border!(10, 10, "white")
-      shadow = shadow.blur_image(0, 3)
+      # text = Draw.new
+      # text.annotate(image, 0, 0, 0, 20, caption) do
+      #   self.gravity = Magick::SouthGravity
+      #   self.pointsize = 50
+      #   self.font_family = 'Arial'
+      #   self.stroke = 'none'
+      # end
 
-      image = shadow.composite(image, -amplitude/2, 5,
-                               Magick::OverCompositeOp)
-      text = Draw.new
-      text.annotate(image, 0, 0, 0, 25, caption) do
-        self.gravity = Magick::SouthGravity
-        self.pointsize = 50
-        self.font_family = 'Arial'
-        self.stroke = 'none'
-      end
-
-      image.rotate!(rand(10))
-      image.trim!
+      image.rotate!(rand(15) * -1 + rand(15))
+      # image.trim!
 
       out = photo_image.path(:polaroid).sub(/\./, ".")
-      image.write(out)
+      Rails.logger.debug out
+      image.transparent('#ff1493').write(out)
     end
 
     def update_image_caption(photo_image, caption)
-      image = Magick::Image.read(photo_image.path).first
+      image = Magick::Image.read(photo_image.path(:copy)).first
 
       #image.border!(18, 58, "#f0f0ff")
-      image = image.frame(25, 50, 25, 15, 0, 0, '#ffffff')
-
-      image.background_color = "none"
+      image = image.frame(25, 50, 25, 15, 0, 0, '#fefefe')
+      image.transparent_color = '#ff1493'
+      image.background_color = 'none'
 
       amplitude = image.columns * 0.01
       wavelength = image.rows  * 2
@@ -79,27 +79,27 @@ class PhotosController < ApplicationController
       image = image.wave(amplitude, wavelength)
       image.rotate!(-90)
 
-      shadow = image.flop
-      shadow = shadow.colorize(1, 1, 1, "gray75")
-      shadow.background_color = "white"
-      shadow.border!(10, 10, "white")
-      shadow = shadow.blur_image(0, 3)
+      # shadow = image.flop
+      # shadow = shadow.colorize(1, 1, 1, "gray75")
+      # shadow.background_color = "white"
+      # shadow.border!(10, 10, "white")
+      # shadow = shadow.blur_image(0, 3)
 
-      image = shadow.composite(image, -amplitude/2, 5,
-                               Magick::OverCompositeOp)
+      # image = shadow.composite(image, -amplitude/2, 5,
+      #                          Magick::OverCompositeOp)
       text = Draw.new
-      text.annotate(image, 0, 0, 0, 25, caption) do
+      text.annotate(image, 0, 0, 0, 20, caption) do
         self.gravity = Magick::SouthGravity
         self.pointsize = 50
         self.font_family = 'Arial'
         self.stroke = 'none'
       end
 
-      image.rotate!(rand(10))
+      image.rotate!(rand(15) * -1 + rand(15))
       image.trim!
 
       out = photo_image.path(:polaroid).sub(/\./, ".")
-      image.write(out)
+      image.transparent('#ff1493').write(out)
     end
     
 end

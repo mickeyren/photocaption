@@ -1,9 +1,10 @@
 #inject angular file upload directives and service.
 
 PhotoCaption.controller 'PhotoController', ($scope, $upload, Restangular) ->
-  $scope.imageUrl = null
-  $scope.uploadedFile = null
-  $scope.caption = ''
+  $scope.imageUrl       = null
+  $scope.uploadedFile   = null
+  $scope.caption        = ''
+  $scope.photo          = null
 
   $scope.onFileSelect = ($files) ->    
     #$files: an array of files selected, each file has name, size, and type.
@@ -34,13 +35,16 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload, Restangular) ->
         
         # file is uploaded successfully
         console.log(data)
+        @photo = data.photo
         @imageUrl = data.url
       )
       i++
 
   $scope.captionChanged = () ->
     console.log(@caption)
-    Restangular.one('photos', 1).customPUT({caption:@caption}).then (data) =>
+    Restangular.one('photos', @photo.id).customPUT(photo: 
+      caption:@caption
+    ).then (data) =>
       console.log(data)
       @imageUrl = data.url + Math.random(10000)
     
