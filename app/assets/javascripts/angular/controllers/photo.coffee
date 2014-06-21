@@ -1,7 +1,6 @@
 #inject angular file upload directives and service.
-window.PhotoCaption = angular.module "PhotoCaption", ['angular-loading-bar', 'angularFileUpload']
 
-PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
+PhotoCaption.controller 'PhotoController', ($scope, $upload, Restangular) ->
   $scope.imageUrl = null
   $scope.uploadedFile = null
   $scope.caption = ''
@@ -25,7 +24,7 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
       $scope.upload = $upload.upload(
         url: '/photos'
         data:
-          caption: $scope.caption
+          caption: @caption
 
         file: @uploadedFile
       ).progress((evt) ->
@@ -41,6 +40,16 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
 
   $scope.captionChanged = () ->
     console.log(@caption)
+    Restangular.one('photos', 1).customPUT({caption:@caption}).then (data) =>
+      console.log(data)
+      @imageUrl = data.url + Math.random(10000)
+    
+    # .getList().then (users) ->
+    #   # returns a list of users
+    #   $scope.user = users[0] # first Restangular obj in list: { id: 123 }
+    #   return
+
+
 
 #.error(...)
 #.then(success, error, progress); 

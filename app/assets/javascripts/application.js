@@ -12,13 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require twitter/bootstrap
 // require turbolinks
 //= require angular-file-upload-shim
 //= require angular
+//= require angular-underscore
 //= require angular-file-upload
 //= require loading-bar
-
+//= require restangular
+//= require module
 //= require_tree ./angular
 
 // require_tree .

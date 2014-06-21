@@ -1,0 +1,1 @@
+window.PhotoCaption = angular.module "PhotoCaption", ['angularFileUpload', 'angular-loading-bar', 'restangular']
