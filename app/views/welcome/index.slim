@@ -1,0 +1,7 @@
+div ng-controller="PhotoController" 
+  input ng-model="myModelObj" type="text" 
+  input ng-file-select="onFileSelect($files)" type="file" 
+  input multiple="" ng-file-select="onFileSelect($files)" type="file" 
+  div ng-file-drag-over-class="optional-css-class" ng-file-drop="onFileSelect($files)" ng-show="dropSupported"  drop files here
+  div ng-file-drop-available="dropSupported=true" ng-show="!dropSupported"  HTML5 Drop File is not supported!
+  button ng-click="upload.abort()"  Cancel Upload
