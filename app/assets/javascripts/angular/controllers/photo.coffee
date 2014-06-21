@@ -3,13 +3,14 @@ window.PhotoCaption = angular.module "PhotoCaption", ["angularFileUpload"]
 
 PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
   $scope.imageUrl = null
+  $scope.uploadedFile = null
+  $scope.caption = ''
 
   $scope.onFileSelect = ($files) ->    
     #$files: an array of files selected, each file has name, size, and type.
     i = 0
-
     while i < $files.length
-      file = $files[i]
+      @uploadedFile = $files[i]
       #upload.php script, node.js route, or servlet url
       # method: 'POST' or 'PUT',
       # headers: {'header-key': 'header-value'},
@@ -26,7 +27,7 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
         data:
           caption: $scope.caption
 
-        file: file
+        file: @uploadedFile
       ).progress((evt) ->
         console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
         
@@ -37,8 +38,9 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload) ->
         @imageUrl = data.url
       )
       i++
-    
 
+  $scope.captionChanged = () ->
+    console.log(@caption)
 
 #.error(...)
 #.then(success, error, progress); 

@@ -1,5 +1,5 @@
 div ng-controller='PhotoController' 
-  input ng-model="caption" type="text" 
+  input ng-model="caption" type="text" ng-change="captionChanged()" delay='500'
   input ng-file-select='onFileSelect($files)' type='file' 
   input multiple='' ng-file-select='onFileSelect($files)' type='file' 
   div style='width:150px;height:150px;border:1px black dashed;' ng-file-drag-over-class='optional-css-class' ng-file-drop='onFileSelect($files)' ng-show='dropSupported'  drop files here
