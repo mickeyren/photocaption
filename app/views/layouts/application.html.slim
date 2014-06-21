@@ -37,7 +37,9 @@ html lang="en" ng-app="PhotoCaption"
             li.hidden
               a href="#page-top" 
             li.page-scroll
-              a href="/#/about"  About
+              a href="/#/gallery" Gallery
+            li.page-scroll
+              a href="/#/about" About
         /! /.navbar-collapse
       /! /.container
     section.intro
@@ -52,15 +54,6 @@ html lang="en" ng-app="PhotoCaption"
               /   a.btn.btn-circle href="#about" 
               /     i.fa.fa-angle-double-down.animated
     
-          
-    
-    section#contact.container.content-section.text-center
-      .row
-        .col-lg-8.col-lg-offset-2
-          h2 Hire Me!
-          p 
-            | Contact me at my 
-            a href='http://programmingmind.com/contact_forms/new' site
 
   - templates('app/views/angular').each do |path|
     script type='text/ng-template' id=path

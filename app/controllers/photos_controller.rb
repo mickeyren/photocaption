@@ -3,6 +3,9 @@ include Magick
 class PhotosController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def index
+    @photos = Photo.all
+  end
 
   def create
     photo = Photo.new

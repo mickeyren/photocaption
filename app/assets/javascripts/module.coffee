@@ -13,6 +13,11 @@ PhotoCaption.config ['$routeProvider', ($routeProvider) ->
       templateUrl: 'about.html'
       page_title: -> 'About Photo Caption'
 
+    .when '/gallery',
+      controller:  'GalleryController'
+      templateUrl: 'gallery.html'
+      page_title: -> 'Photo Caption Gallery'    
+
     .otherwise
       templateUrl: '404.html'
       page_title: -> "Not Found"      
