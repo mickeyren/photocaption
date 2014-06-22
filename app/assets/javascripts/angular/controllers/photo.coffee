@@ -13,7 +13,7 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload, Restangular) ->
       @uploadedFile = $files[i]
 
       $scope.upload = $upload.upload(
-        url: '/photos'
+        url: '/photos.json'
         data:
           caption: @caption
 

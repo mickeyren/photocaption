@@ -10,28 +10,25 @@ class PhotosController < ApplicationController
   end
 
   def create
-    photo = Photo.new
-    photo.caption = params[:caption]
-    photo.image = params[:file]
+    @photo = Photo.new
+    @photo.caption = params[:caption]
+    @photo.image = params[:file]
 
-    @user.photos << photo
+    @user.photos << @photo
     
-    photo.polaroid!(photo.image.path(:copy), photo.image.path(:polaroid))
-    photo.polaroid!(photo.image.path(:thumb), photo.image.path(:polaroid_thumb), true)
-
-    if photo
-      render json: { photo: photo, url: photo.image.url(:polaroid) }
-    else
-    end
+    @photo.polaroid!(@photo.image.path(:copy), @photo.image.path(:polaroid))
+    @photo.polaroid!(@photo.image.path(:thumb), @photo.image.path(:polaroid_thumb), true)
   end
 
   def update
-    photo = Photo.find params[:id]
-    photo.update_attributes(photo_params)
+    @photo = Photo.find params[:id]
+    @photo.update_attributes(photo_params)
 
-    photo.polaroid!(photo.image.path(:copy), photo.image.path(:polaroid), false, photo_params[:caption])
-    
-    render json: { url: photo.image.url(:polaroid) }
+    @photo.polaroid!(@photo.image.path(:copy), @photo.image.path(:polaroid), false, photo_params[:caption])
+  end
+
+  def show 
+    @photo = Photo.find(params[:id])
   end
 
   protected

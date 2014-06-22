@@ -24,11 +24,9 @@ PhotoCaption.config ['$routeProvider', ($routeProvider) ->
 ]
 
 
-PhotoCaption.run ($rootScope) ->
+PhotoCaption.run ($rootScope, Restangular) ->
   $("#drop-box").fitText 1.2,
     minFontSize: '60px'
     maxFontSize: '120px'
 
-
-
-
+  Restangular.setRequestSuffix('.json')
