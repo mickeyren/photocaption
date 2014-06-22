@@ -1,6 +1,6 @@
 #inject angular file upload directives and service.
 
-PhotoCaption.controller 'PhotoController', ($scope, $upload, Restangular) ->
+PhotoCaption.controller 'PhotoController', ($scope, $upload, Restangular, Photos) ->
   $scope.imageUrl       = null
   $scope.uploadedFile   = null
   $scope.caption        = ''
@@ -31,7 +31,7 @@ PhotoCaption.controller 'PhotoController', ($scope, $upload, Restangular) ->
 
   $scope.captionChanged = () ->
     if @uploadedFile
-      Restangular.one('photos', @photo.id).customPUT(photo: 
+      Photos.one(@photo.id).customPUT(photo: 
         caption:@caption
       ).then (data) =>
         console.log(data)

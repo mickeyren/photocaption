@@ -23,10 +23,11 @@ PhotoCaption.config ['$routeProvider', ($routeProvider) ->
       page_title: -> "Not Found"      
 ]
 
-
+Photo = null
 PhotoCaption.run ($rootScope, Restangular) ->
   $("#drop-box").fitText 1.2,
     minFontSize: '60px'
     maxFontSize: '120px'
 
   Restangular.setRequestSuffix('.json')
+  Photo = Restangular.service('photos');
