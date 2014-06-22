@@ -41,7 +41,6 @@ class Photo < ActiveRecord::Base
     end
 
     image.rotate!(rand(15) * -1 + rand(15))
-    image.rotate!(10)
 
     out = dest.sub(/\./, ".")
     image.transparent('#ff1493').write(out)
