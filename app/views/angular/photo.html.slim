@@ -9,7 +9,7 @@ div ng-controller='PhotoController'
     img src='{{imageUrl}}'
   div ng-file-drop-available='dropSupported=true' ng-show='!dropSupported'  HTML5 Drop File is not supported!
   br
-  input class='form-control input-lg' ng-model="caption" type="text" ng-change="captionChanged()" delay='500' maxlength='25'  
+  input class='form-control input-lg' ng-model="caption" type="text" ng-change="captionChanged()" delay='500'
   / button ng-click='upload.abort()'  Cancel Upload
 
 
