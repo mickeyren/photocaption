@@ -1,11 +1,11 @@
 div ng-controller='PhotoController' 
   / input ng-file-select='onFileSelect($files)' type='file' 
   / input multiple='' ng-file-select='onFileSelect($files)' type='file' 
-  div id="drop-box" ng-file-drag-over-class='optional-css-class' ng-file-drop='onFileSelect($files)' ng-show='!imageUrl.length'
+  div id="drop-box" ng-file-drag-over-class='drop-box-with-image' ng-file-drop='onFileSelect($files)' ng-show='!imageUrl.length'
     | Drag Your 
     br
     | Photo Here
-  #photo.col-md-12 ng-show='imageUrl.length'
+  #photo.col-md-12 ng-show='imageUrl.length' ng-file-drop='onFileSelect($files)'
     img src='{{imageUrl}}'
   div ng-file-drop-available='dropSupported=true' ng-show='!dropSupported'  HTML5 Drop File is not supported!
   br
