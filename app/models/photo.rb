@@ -1,18 +1,14 @@
 class Photo < ActiveRecord::Base
-  
+  belongs_to :user
   has_attached_file :image, 
                     styles: { 
-                      copy: ['640x480>', :png], 
-                      polaroid: ['1x1>', :png], 
+                      copy: ['640x', :png], 
+                      polaroid: ['1x1', :png], 
+                      polaroid_thumb: ['1x1', :png], 
                       thumb: ['100x100>', :png] 
                     }, 
                     default_url: '/images/:style/missing.png'
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  def to_builder
-    Jbuilder.new do |photo|
-      photo.(self, :caption)
-    end
-  end
 end

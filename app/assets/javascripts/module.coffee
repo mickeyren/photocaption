@@ -27,6 +27,8 @@ PhotoCaption.config ['$routeProvider', ($routeProvider) ->
 PhotoCaption.run ($rootScope) ->
   $("#drop-box").fitText 1.2,
     minFontSize: '60px'
-    maxFontSize: '100px'
+    maxFontSize: '120px'
+
+
 
 
