@@ -2,6 +2,6 @@ section#gallery.container.text-center
   .row
     .col-md-8
       h2 Gallery
-      ul
-        li.col-xs-5.col-sm-3.col-md-2 ng-repeat='photo in photos'
+      .col-xs-5.col-sm-3.col-md-2 ng-repeat='photo in photos'
+        p style='height:120px'
           img src='{{photo.thumb_url}}'
