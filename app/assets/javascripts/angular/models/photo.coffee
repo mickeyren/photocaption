@@ -1,2 +1,3 @@
-PhotoCaption.factory 'Photos', (Restangular) ->
-  Restangular.service 'photos'
+PhotoCaption.factory 'Photos', ['Restangular', (Restangular) ->
+    Restangular.service 'photos'
+]

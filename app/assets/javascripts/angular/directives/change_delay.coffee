@@ -1,6 +1,4 @@
-PhotoCaption.directive "delay", [
-  "$timeout"
-  ($timeout) ->
+PhotoCaption.directive "delay", ['$timeout', ($timeout) ->
     return (
       restrict: "A"
       scope: true

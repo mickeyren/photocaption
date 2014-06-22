@@ -1,3 +1,4 @@
+require 'RMagick'
 include Magick
 
 class PhotosController < ApplicationController

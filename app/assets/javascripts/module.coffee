@@ -1,4 +1,3 @@
-
 window.PhotoCaption = angular.module "PhotoCaption", ['angularFileUpload', 'angular-loading-bar', 'restangular', 'ngRoute']
 
 PhotoCaption.config ['$routeProvider', ($routeProvider) ->
@@ -23,11 +22,10 @@ PhotoCaption.config ['$routeProvider', ($routeProvider) ->
       page_title: -> "Not Found"      
 ]
 
-Photo = null
-PhotoCaption.run ($rootScope, Restangular) ->
-  $("#drop-box").fitText 1.2,
-    minFontSize: '60px'
-    maxFontSize: '120px'
+PhotoCaption.run ['$rootScope', 'Restangular', ($rootScope, Restangular) ->
+    $("#drop-box").fitText 1.2,
+      minFontSize: '60px'
+      maxFontSize: '120px'
 
-  Restangular.setRequestSuffix('.json')
-  Photo = Restangular.service('photos');
+    Restangular.setRequestSuffix('.json')
+]

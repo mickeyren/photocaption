@@ -1,3 +1,6 @@
 #inject angular file upload directives and service.
 
-PhotoCaption.controller 'AboutController', ($scope) ->
+PhotoCaption.controller 'AboutController', [
+  '$scope' 
+  ($scope) ->
+]
